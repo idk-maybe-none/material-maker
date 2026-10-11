@@ -842,9 +842,9 @@ func do_load_material(filename : String, update_hierarchy : bool = true) -> bool
 		graph_edit.top_generator.set_current_mesh(current_mesh)
 	return true
 
-func do_load_material_from_data(filename : String, data : String, update_hierarchy : bool = true) -> bool:
+func do_load_material_from_data(filename : String, data : String, update_hierarchy : bool = true, try_to_rescue : bool = true) -> bool:
 	var graph_edit : MMGraphEdit = create_new_graph_edit_if_needed()
-	graph_edit.load_from_data(filename, data)
+	graph_edit.load_from_data(filename, data, try_to_rescue)
 	if update_hierarchy:
 		hierarchy.update_from_graph_edit(get_current_graph_edit())
 	return true
