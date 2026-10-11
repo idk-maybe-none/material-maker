@@ -152,6 +152,8 @@ limits/message_queue/max_size_kb=16384
 [network]
 
 limits/debugger/max_chars_per_second=204800000
+limits/debugger_stdout/max_chars_per_second=204800000
+limits/websocket_server/max_out_buffer_kb=4700
 
 [rendering]
 
