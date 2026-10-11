@@ -14,6 +14,9 @@
 [ext_resource type="PackedScene" uid="uid://dmyq6xxfx88m0" path="res://material_maker/tools/environment_manager/environment_manager.tscn" id="13"]
 [ext_resource type="Script" uid="uid://ds4jcblbferbu" path="res://material_maker/tools/library_manager/library_manager.gd" id="14"]
 [ext_resource type="Texture2D" uid="uid://ub2r8hsxs6vt" path="res://material_maker/icons/paste_none.tres" id="15"]
+[ext_resource path="res://material_maker/inform_label.gd" type="Script" id=16]
+[ext_resource path="res://mml_linker/server.gd" type="Script" id=17]
+[ext_resource path="res://mml_linker/PortLineEdit.gd" type="Script" id=18]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2cpsi"]
 bg_color = Color(0.294, 0.294, 0.294, 0.7)
@@ -246,6 +249,38 @@ texture_normal = SubResource("8")
 [node name="VSeparator1" type="VSeparator" parent="VBoxContainer/StatusBar/HBox" unique_id=398470012]
 layout_mode = 2
 
+
+[node name="Server" type="HBoxContainer" parent="VBoxContainer/TopBar"]
+margin_left = 997.0
+margin_right = 1177.0
+margin_bottom = 25.0
+script = ExtResource( 17 )
+[node name="ServerStartCheckBox" type="CheckBox" parent="VBoxContainer/TopBar/Server"]
+margin_right = 71.0
+margin_bottom = 25.0
+text = "Server"
+[node name="PortLabel" type="Label" parent="VBoxContainer/TopBar/Server"]
+margin_left = 75.0
+margin_right = 116.0
+margin_bottom = 25.0
+text = "Port:"
+align = 2
+[node name="PortLineEdit" type="LineEdit" parent="VBoxContainer/TopBar/Server"]
+margin_left = 120.0
+margin_right = 180.0
+margin_bottom = 25.0
+text = "6001"
+placeholder_text = "Port"
+script = ExtResource( 18 )
+[node name="InformLabel" type="Label" parent="VBoxContainer/TopBar/Server"]
+visible = false
+margin_left = 184.0
+margin_right = 560.0
+margin_bottom = 25.0
+text = "The quick brown fox jumps over the lazy dog"
+clip_text = true
+script = ExtResource( 16 )
+
 [node name="Share" parent="VBoxContainer/StatusBar/HBox" unique_id=798130657 instance=ExtResource("12")]
 unique_name_in_owner = true
 layout_mode = 2
@@ -286,6 +321,9 @@ script = ExtResource("9")
 [node name="AddNodePopup" parent="." unique_id=142473620 instance=ExtResource("7")]
 visible = false
 
+[connection signal="toggled" from="VBoxContainer/TopBar/Server/ServerStartCheckBox" to="VBoxContainer/TopBar/Server" method="toggle"]
+[connection signal="text_entered" from="VBoxContainer/TopBar/Server/PortLineEdit" to="VBoxContainer/TopBar/Server/PortLineEdit" method="_on_PortLineEdit_text_entered"]
+[connection signal="valid_port_entered" from="VBoxContainer/TopBar/Server/PortLineEdit" to="VBoxContainer/TopBar/Server" method="set_port"]
 [connection signal="layout_changed" from="VBoxContainer/Layout/FlexibleLayout" to="." method="update_menus"]
 [connection signal="gui_input" from="VBoxContainer/ConsoleResizer" to="VBoxContainer/Console" method="_on_console_resizer_gui_input"]
 [connection signal="gui_input" from="VBoxContainer/ConsoleResizer/ResizerBar" to="VBoxContainer/Console" method="_on_console_resizer_gui_input"]
